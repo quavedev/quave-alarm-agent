@@ -21,10 +21,10 @@ Discovery:
 
 ## Dry Run
 
-Run a dry-run before the first real page:
+Before the first real page, print the payload locally and inspect it. This does not contact the API:
 
 ```bash
-npx -y github:quavedev/quave-alarm-agent trigger --dry-run --message "Quave Alarm dry-run from agent setup."
+printf '%s\n' '{"title":"Quave Alarm","body":"Quave Alarm dry-run from agent setup.","severity":"critical"}'
 ```
 
 ## Page The User
@@ -32,54 +32,70 @@ npx -y github:quavedev/quave-alarm-agent trigger --dry-run --message "Quave Alar
 Use a short message that says where the user should look and what is blocked. Include `--link` when a URL will take the user directly to the work.
 
 ```bash
-npx -y github:quavedev/quave-alarm-agent trigger \
-  --message "Look at Codex: I need your decision to continue." \
-  --link "https://chatgpt.com/codex"
+curl -fsS -X POST https://alarm.quave.ai/api/alarms \
+  -H "Authorization: Bearer $QUAVE_ALARM_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Quave Alarm",
+    "body": "Look at Codex: I need your decision to continue.",
+    "severity": "critical",
+    "link": "https://chatgpt.com/codex"
+  }'
 ```
 
 Useful options:
 
-- `--message`: required.
-- `--title`: defaults to `Quave Alarm`.
-- `--severity`: `info`, `warning`, or `critical`; defaults to `critical`.
-- `--link`: optional `http://` or `https://` destination.
-- `--delay-seconds`: relative scheduling.
-- `--scheduled-at`: exact ISO or local wall-clock timestamp.
-- `--time-zone`: IANA time zone for local wall-clock timestamps.
-- `--ttl-seconds`: delivery window.
-- `--dry-run`: print the redacted payload without ringing.
+- `body`: required message.
+- `title`: defaults to `Quave Alarm`.
+- `severity`: `info`, `warning`, or `critical`; defaults to `critical`.
+- `link`: optional `http://` or `https://` destination.
+- `delaySeconds`: relative scheduling.
+- `scheduledAt`: exact ISO or local wall-clock timestamp.
+- `timeZone`: IANA time zone for local wall-clock timestamps.
+- `ttlSeconds`: delivery window.
 
-Do not combine `--delay-seconds` and `--scheduled-at`.
+Do not combine `delaySeconds` and `scheduledAt`.
 
 ## Inspect, Edit, And Remove Alarms
 
-When you need to correct or remove a previously created alarm, use the CLI commands first. Do not guess from the HTML page or fall back to raw `curl` unless the CLI fails.
+When you need to correct or remove a previously created alarm, use the API directly. Removed alarms are logically deleted from normal lists and delivery.
 
 List active alarms:
 
 ```bash
-npx -y github:quavedev/quave-alarm-agent list
+curl -fsS https://alarm.quave.ai/api/alarms \
+  -H "Authorization: Bearer $QUAVE_ALARM_API_KEY"
 ```
 
 Edit an alarm:
 
 ```bash
-npx -y github:quavedev/quave-alarm-agent edit <alarm-id> \
-  --scheduled-at "2026-06-13 16:19:00" \
-  --time-zone "America/Campo_Grande" \
-  --status pending
+curl -fsS -X PATCH https://alarm.quave.ai/api/alarms/<alarm-id> \
+  -H "Authorization: Bearer $QUAVE_ALARM_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "scheduledAt": "2026-06-13 16:19:00",
+    "timeZone": "America/Campo_Grande",
+    "status": "pending"
+  }'
 ```
 
 Remove an alarm from normal lists and delivery:
 
 ```bash
-npx -y github:quavedev/quave-alarm-agent remove <alarm-id>
+curl -fsS -X DELETE https://alarm.quave.ai/api/alarms/<alarm-id> \
+  -H "Authorization: Bearer $QUAVE_ALARM_API_KEY"
 ```
 
 Lifecycle helpers:
 
 ```bash
-npx -y github:quavedev/quave-alarm-agent cancel <alarm-id>
-npx -y github:quavedev/quave-alarm-agent dismiss <alarm-id>
-npx -y github:quavedev/quave-alarm-agent snooze <alarm-id> --delay-seconds 600
+curl -fsS -X POST https://alarm.quave.ai/api/alarms/<alarm-id>/cancel \
+  -H "Authorization: Bearer $QUAVE_ALARM_API_KEY"
+curl -fsS -X POST https://alarm.quave.ai/api/alarms/<alarm-id>/dismiss \
+  -H "Authorization: Bearer $QUAVE_ALARM_API_KEY"
+curl -fsS -X POST https://alarm.quave.ai/api/alarms/<alarm-id>/snooze \
+  -H "Authorization: Bearer $QUAVE_ALARM_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"delaySeconds":600}'
 ```

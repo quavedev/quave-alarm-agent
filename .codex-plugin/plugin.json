@@ -1,0 +1,6 @@
+{
+  "name": "quave-alarm-agent",
+  "version": "0.1.0",
+  "description": "Install Quave Alarm so agents can call the user's attention with a user-owned API key.",
+  "skills": "./skills/"
+}

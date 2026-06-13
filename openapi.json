@@ -1,0 +1,48 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Quave Alarm API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://alarm.quave.ai"
+    }
+  ],
+  "security": [
+    {
+      "bearerApiKey": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerApiKey": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "paths": {
+    "/api/alarms": {
+      "get": {
+        "summary": "List alarms"
+      },
+      "post": {
+        "summary": "Create alarm"
+      }
+    },
+    "/api/api-keys": {
+      "get": {
+        "summary": "List API keys"
+      },
+      "post": {
+        "summary": "Create API key"
+      }
+    },
+    "/api/api-keys/{id}/rotate": {
+      "post": {
+        "summary": "Rotate API key"
+      }
+    }
+  }
+}

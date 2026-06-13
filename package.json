@@ -1,0 +1,25 @@
+{
+  "name": "quave-alarm-agent",
+  "version": "0.1.0",
+  "description": "Agent skill and CLI for calling user attention through Quave Alarm.",
+  "type": "module",
+  "homepage": "https://alarm.quave.ai/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quavedev/quave-alarm-agent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/quavedev/quave-alarm-agent/issues"
+  },
+  "bin": {
+    "quave-alarm-agent": "./scripts/fire-quave-alarm.mjs"
+  },
+  "files": [
+    ".codex-plugin/",
+    "skills/",
+    "scripts/",
+    "README.md",
+    "openapi.json"
+  ],
+  "license": "MIT"
+}

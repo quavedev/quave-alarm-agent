@@ -2,46 +2,223 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Quave Alarm API",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "description": "Create, list, update, and manage alarms for the authenticated user's registered devices."
   },
   "servers": [
     {
       "url": "https://alarm.quave.ai"
     }
   ],
+  "components": {
+    "securitySchemes": {
+      "bearerApiKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Use QUAVE_ALARM_API_KEY as the bearer token."
+      }
+    }
+  },
   "security": [
     {
       "bearerApiKey": []
     }
   ],
-  "components": {
-    "securitySchemes": {
-      "bearerApiKey": {
-        "type": "http",
-        "scheme": "bearer"
-      }
-    }
-  },
   "paths": {
+    "/health": {
+      "get": {
+        "security": [],
+        "summary": "Health check",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/signup/start": {
+      "post": {
+        "security": [],
+        "summary": "Start email-code signup",
+        "responses": {
+          "200": {
+            "description": "Signup code created"
+          }
+        }
+      }
+    },
+    "/api/signup/verify": {
+      "post": {
+        "security": [],
+        "summary": "Verify signup and receive first API key once",
+        "responses": {
+          "201": {
+            "description": "User, device, and API key created"
+          }
+        }
+      }
+    },
     "/api/alarms": {
       "get": {
-        "summary": "List alarms"
+        "summary": "List alarms",
+        "responses": {
+          "200": {
+            "description": "Alarm list"
+          }
+        }
       },
       "post": {
-        "summary": "Create alarm"
+        "summary": "Create alarm",
+        "responses": {
+          "201": {
+            "description": "Alarm created"
+          }
+        }
+      }
+    },
+    "/api/alarms/{id}": {
+      "patch": {
+        "summary": "Edit an alarm",
+        "responses": {
+          "200": {
+            "description": "Alarm updated"
+          },
+          "404": {
+            "description": "Alarm not found"
+          }
+        }
+      },
+      "post": {
+        "summary": "Edit an alarm for clients where PATCH is awkward",
+        "responses": {
+          "200": {
+            "description": "Alarm updated"
+          },
+          "404": {
+            "description": "Alarm not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Logically remove an alarm",
+        "responses": {
+          "200": {
+            "description": "Alarm removed"
+          },
+          "404": {
+            "description": "Alarm not found"
+          }
+        }
+      }
+    },
+    "/api/alarms/{id}/remove": {
+      "post": {
+        "summary": "Logically remove an alarm for clients where DELETE is awkward",
+        "responses": {
+          "200": {
+            "description": "Alarm removed"
+          },
+          "404": {
+            "description": "Alarm not found"
+          }
+        }
+      }
+    },
+    "/api/alarms/{id}/snooze": {
+      "post": {
+        "summary": "Snooze an alarm",
+        "responses": {
+          "200": {
+            "description": "Alarm snoozed"
+          },
+          "404": {
+            "description": "Alarm not found"
+          }
+        }
+      }
+    },
+    "/api/alarms/{id}/dismiss": {
+      "post": {
+        "summary": "Dismiss an alarm",
+        "responses": {
+          "200": {
+            "description": "Alarm dismissed"
+          },
+          "404": {
+            "description": "Alarm not found"
+          }
+        }
+      }
+    },
+    "/api/alarms/{id}/cancel": {
+      "post": {
+        "summary": "Cancel an alarm",
+        "responses": {
+          "200": {
+            "description": "Alarm canceled"
+          },
+          "404": {
+            "description": "Alarm not found"
+          }
+        }
       }
     },
     "/api/api-keys": {
       "get": {
-        "summary": "List API keys"
+        "summary": "List API keys",
+        "responses": {
+          "200": {
+            "description": "API key list without plaintext secrets"
+          }
+        }
       },
       "post": {
-        "summary": "Create API key"
+        "summary": "Create API key",
+        "responses": {
+          "201": {
+            "description": "API key created with plaintext returned once"
+          }
+        }
       }
     },
     "/api/api-keys/{id}/rotate": {
       "post": {
-        "summary": "Rotate API key"
+        "summary": "Rotate an API key",
+        "responses": {
+          "201": {
+            "description": "Replacement key created"
+          }
+        }
+      }
+    },
+    "/api/api-keys/{id}/revoke": {
+      "post": {
+        "summary": "Revoke an API key",
+        "responses": {
+          "200": {
+            "description": "API key revoked"
+          }
+        }
+      }
+    },
+    "/api/devices/register": {
+      "post": {
+        "summary": "Register device",
+        "responses": {
+          "200": {
+            "description": "Device registered"
+          }
+        }
+      }
+    },
+    "/api/devices/{deviceId}/events": {
+      "get": {
+        "summary": "Long-poll device events",
+        "responses": {
+          "200": {
+            "description": "Pending alarm events"
+          }
+        }
       }
     }
   }

@@ -50,3 +50,36 @@ Useful options:
 - `--dry-run`: print the redacted payload without ringing.
 
 Do not combine `--delay-seconds` and `--scheduled-at`.
+
+## Inspect, Edit, And Remove Alarms
+
+When you need to correct or remove a previously created alarm, use the CLI commands first. Do not guess from the HTML page or fall back to raw `curl` unless the CLI fails.
+
+List active alarms:
+
+```bash
+npx -y github:quavedev/quave-alarm-agent list
+```
+
+Edit an alarm:
+
+```bash
+npx -y github:quavedev/quave-alarm-agent edit <alarm-id> \
+  --scheduled-at "2026-06-13 16:19:00" \
+  --time-zone "America/Campo_Grande" \
+  --status pending
+```
+
+Remove an alarm from normal lists and delivery:
+
+```bash
+npx -y github:quavedev/quave-alarm-agent remove <alarm-id>
+```
+
+Lifecycle helpers:
+
+```bash
+npx -y github:quavedev/quave-alarm-agent cancel <alarm-id>
+npx -y github:quavedev/quave-alarm-agent dismiss <alarm-id>
+npx -y github:quavedev/quave-alarm-agent snooze <alarm-id> --delay-seconds 600
+```

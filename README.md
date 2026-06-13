@@ -43,4 +43,17 @@ QUAVE_ALARM_API_KEY="<your key>" \
   --link "https://chatgpt.com/codex"
 ```
 
+List, edit, and remove existing alarms:
+
+```bash
+npx -y github:quavedev/quave-alarm-agent list
+npx -y github:quavedev/quave-alarm-agent edit <alarm-id> \
+  --scheduled-at "2026-06-13 16:19:00" \
+  --time-zone "America/Campo_Grande" \
+  --status pending
+npx -y github:quavedev/quave-alarm-agent remove <alarm-id>
+```
+
+Use `cancel`, `dismiss`, or `snooze` when you want lifecycle history instead of removal.
+
 Never commit, log, or paste API keys into chat, URLs, or command arguments.

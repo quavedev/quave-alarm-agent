@@ -2,6 +2,26 @@
 
 Install this package so an AI agent can call your attention through Quave Alarm.
 
+## Android app
+
+Download the latest public APK:
+
+```text
+https://github.com/quavedev/quave-alarm-agent/releases/latest/download/QuaveAlarm.apk
+```
+
+Install it on Android, open Quave Alarm, create or verify your account, and grant the requested alarm permissions:
+
+- notifications
+- full-screen alarm alerts
+- exact alarms
+- Do Not Disturb bypass / notification policy access
+- ignore battery optimization / unrestricted battery usage
+
+Copy the generated API key only into `QUAVE_ALARM_API_KEY` for your agent environment or approved secret store.
+
+## Agent install
+
 ```bash
 npx skills add quavedev/quave-alarm-agent --skill quave-alarm -g -a '*'
 ```

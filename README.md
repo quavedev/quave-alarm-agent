@@ -11,14 +11,14 @@ Set your API key as `QUAVE_ALARM_API_KEY`. Create or rotate the key from the Qua
 Dry-run:
 
 ```bash
-npx quave-alarm-agent trigger --dry-run --message "Quave Alarm setup test."
+npx -y github:quavedev/quave-alarm-agent trigger --dry-run --message "Quave Alarm setup test."
 ```
 
 Real page:
 
 ```bash
 QUAVE_ALARM_API_KEY="<your key>" \
-  npx quave-alarm-agent trigger \
+  npx -y github:quavedev/quave-alarm-agent trigger \
   --message "Look at Codex: I need your decision to continue." \
   --link "https://chatgpt.com/codex"
 ```

@@ -24,7 +24,7 @@ Discovery:
 Run a dry-run before the first real page:
 
 ```bash
-npx quave-alarm-agent trigger --dry-run --message "Quave Alarm dry-run from agent setup."
+npx -y github:quavedev/quave-alarm-agent trigger --dry-run --message "Quave Alarm dry-run from agent setup."
 ```
 
 ## Page The User
@@ -32,7 +32,7 @@ npx quave-alarm-agent trigger --dry-run --message "Quave Alarm dry-run from agen
 Use a short message that says where the user should look and what is blocked. Include `--link` when a URL will take the user directly to the work.
 
 ```bash
-npx quave-alarm-agent trigger \
+npx -y github:quavedev/quave-alarm-agent trigger \
   --message "Look at Codex: I need your decision to continue." \
   --link "https://chatgpt.com/codex"
 ```

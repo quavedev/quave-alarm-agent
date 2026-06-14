@@ -38,7 +38,7 @@ The installer downloads the latest zip, installs Quave Alarm into `~/Application
 
 Open Quave Alarm on macOS, paste an existing API key, and enable launch-at-login in Preferences if you want desktop-first delivery. The macOS app stores the API key in Keychain, long-polls the same API as Android, locally schedules synced future alarms, and shows a full-screen looping alarm until dismiss or snooze.
 
-The current macOS zip is a direct-download build. Until Developer ID signing/notarization is configured, macOS Gatekeeper may require an explicit Open action.
+The current public macOS zip is Developer ID signed, notarized, and stapled for direct download outside the Mac App Store. Local preview builds may still require an explicit Open action.
 
 ## Agent install
 

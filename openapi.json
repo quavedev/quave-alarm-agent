@@ -201,12 +201,46 @@
         }
       }
     },
+    "/api/devices": {
+      "get": {
+        "summary": "List registered devices and their platform metadata",
+        "responses": {
+          "200": {
+            "description": "Device list"
+          }
+        }
+      }
+    },
     "/api/devices/register": {
       "post": {
         "summary": "Register device",
         "responses": {
           "200": {
             "description": "Device registered"
+          }
+        }
+      }
+    },
+    "/api/devices/{deviceId}": {
+      "patch": {
+        "summary": "Update device metadata, priority, or enabled state",
+        "responses": {
+          "200": {
+            "description": "Device updated"
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      },
+      "post": {
+        "summary": "Update device metadata for clients where PATCH is awkward",
+        "responses": {
+          "200": {
+            "description": "Device updated"
+          },
+          "404": {
+            "description": "Device not found"
           }
         }
       }

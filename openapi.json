@@ -36,6 +36,17 @@
         }
       }
     },
+    "/install-macos.sh": {
+      "get": {
+        "security": [],
+        "summary": "Download the macOS terminal installer script",
+        "responses": {
+          "200": {
+            "description": "Shell installer script"
+          }
+        }
+      }
+    },
     "/api/signup/start": {
       "post": {
         "security": [],

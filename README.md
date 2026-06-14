@@ -22,13 +22,21 @@ Copy the generated API key only into `QUAVE_ALARM_API_KEY` for your agent enviro
 
 ## macOS app
 
+Recommended terminal install:
+
+```bash
+curl -fsSL https://alarm.quave.ai/install-macos.sh | bash
+```
+
 Download the latest public macOS app zip:
 
 ```text
 https://github.com/quavedev/quave-alarm-agent/releases/latest/download/QuaveAlarm-macOS.zip
 ```
 
-Unzip and open Quave Alarm on macOS, paste an existing API key, and enable launch-at-login in Preferences if you want desktop-first delivery. The macOS app stores the API key in Keychain, long-polls the same API as Android, locally schedules synced future alarms, and shows a full-screen looping alarm until dismiss or snooze.
+The installer downloads the latest zip, installs Quave Alarm into `~/Applications`, opens it, and prints the next setup steps. You can still download/unzip manually if preferred.
+
+Open Quave Alarm on macOS, paste an existing API key, and enable launch-at-login in Preferences if you want desktop-first delivery. The macOS app stores the API key in Keychain, long-polls the same API as Android, locally schedules synced future alarms, and shows a full-screen looping alarm until dismiss or snooze.
 
 The current macOS zip is a direct-download build. Until Developer ID signing/notarization is configured, macOS Gatekeeper may require an explicit Open action.
 

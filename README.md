@@ -28,17 +28,17 @@ Recommended terminal install:
 curl -fsSL https://alarm.quave.ai/install-macos.sh | bash
 ```
 
-Download the latest public macOS app zip:
+Manual drag-and-drop install:
 
 ```text
-https://github.com/quavedev/quave-alarm-agent/releases/latest/download/QuaveAlarm-macOS.zip
+https://github.com/quavedev/quave-alarm-agent/releases/latest/download/QuaveAlarm-macOS.dmg
 ```
 
-The installer downloads the latest zip, installs Quave Alarm into `~/Applications`, opens it, and prints the next setup steps. You can still download/unzip manually if preferred.
+Open the DMG, drag Quave Alarm into Applications, then open it. The terminal installer downloads the latest zip, installs Quave Alarm into `~/Applications`, opens it, and prints the next setup steps.
 
 Open Quave Alarm on macOS, paste an existing API key, and enable launch-at-login in Preferences if you want desktop-first delivery. The macOS app stores the API key in Keychain, long-polls the same API as Android, locally schedules synced future alarms, and shows a full-screen looping alarm until dismiss or snooze.
 
-The current public macOS zip is Developer ID signed, notarized, and stapled for direct download outside the Mac App Store. Local preview builds may still require an explicit Open action.
+The current public macOS DMG and zip are Developer ID signed, notarized, and stapled for direct download outside the Mac App Store. Local preview builds may still require an explicit Open action.
 
 ## Agent install
 

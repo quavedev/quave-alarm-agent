@@ -19,7 +19,7 @@ if (command === "trigger") {
   }
 }
 
-const baseUrl = (args["base-url"] || process.env.QUAVE_ALARM_BASE_URL || "https://alarm.quave.ai").replace(/\/+$/, "");
+const baseUrl = (args["base-url"] || process.env.QUAVE_PAGER_BASE_URL || "https://pager.quave.ai").replace(/\/+$/, "");
 const request = buildRequest(command, args);
 
 if (!request) {
@@ -31,9 +31,9 @@ if (args["dry-run"]) {
   process.exit(0);
 }
 
-const apiKey = process.env.QUAVE_ALARM_API_KEY;
+const apiKey = process.env.QUAVE_PAGER_API_KEY;
 if (!apiKey) {
-  fail("QUAVE_ALARM_API_KEY is required. Ask the user to create or rotate a key in the Quave Alarm Android app and expose it as an environment variable.");
+  fail("QUAVE_PAGER_API_KEY is required. Ask the user to create or rotate a key in the Quave Pager Android app and expose it as an environment variable.");
 }
 
 const headers = { "Authorization": `Bearer ${apiKey}` };
@@ -49,7 +49,7 @@ const response = await fetch(`${baseUrl}${request.path}`, {
 
 const body = await response.json().catch(() => ({}));
 if (!response.ok) {
-  fail(`Quave Alarm request failed: HTTP ${response.status} ${JSON.stringify(body)}`);
+  fail(`Quave Pager request failed: HTTP ${response.status} ${JSON.stringify(body)}`);
 }
 
 console.log(JSON.stringify(formatResponse(command, body), null, 2));
@@ -57,7 +57,7 @@ console.log(JSON.stringify(formatResponse(command, body), null, 2));
 function buildRequest(commandName, parsedArgs) {
   if (commandName === "trigger") {
     const payload = {
-      title: parsedArgs.title || "Quave Alarm",
+      title: parsedArgs.title || "Quave Pager",
       body: parsedArgs.message || parsedArgs.body,
       severity: parsedArgs.severity || "critical"
     };

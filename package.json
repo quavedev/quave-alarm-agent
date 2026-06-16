@@ -1,18 +1,18 @@
 {
-  "name": "quave-alarm-agent",
+  "name": "pager-agent",
   "version": "0.1.0",
-  "description": "Agent skill and CLI for calling user attention through Quave Alarm.",
+  "description": "Agent skill and CLI for calling user attention through Quave Pager.",
   "type": "module",
-  "homepage": "https://alarm.quave.ai/",
+  "homepage": "https://pager.quave.ai/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quavedev/quave-alarm-agent.git"
+    "url": "git+https://github.com/quavedev/pager-agent.git"
   },
   "bugs": {
-    "url": "https://github.com/quavedev/quave-alarm-agent/issues"
+    "url": "https://github.com/quavedev/pager-agent/issues"
   },
   "bin": {
-    "quave-alarm-agent": "./scripts/fire-quave-alarm.mjs"
+    "pager-agent": "./scripts/fire-quave-pager.mjs"
   },
   "files": [
     ".codex-plugin/",

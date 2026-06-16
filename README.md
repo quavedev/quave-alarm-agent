@@ -1,16 +1,16 @@
-# Quave Alarm Agent
+# Quave Pager Agent
 
-Install this package so an AI agent can call your attention through Quave Alarm.
+Install this package so an AI agent can call your attention through Quave Pager.
 
 ## Android app
 
 Download the latest public APK:
 
 ```text
-https://github.com/quavedev/quave-alarm-agent/releases/latest/download/QuaveAlarm.apk
+https://github.com/quavedev/pager-agent/releases/latest/download/QuavePager.apk
 ```
 
-Install it on Android, open Quave Alarm, create or verify your account, and grant the requested alarm permissions:
+Install it on Android, open Quave Pager, create or verify your account, and grant the requested alarm permissions:
 
 - notifications
 - full-screen alarm alerts
@@ -18,47 +18,47 @@ Install it on Android, open Quave Alarm, create or verify your account, and gran
 - Do Not Disturb bypass / notification policy access
 - ignore battery optimization / unrestricted battery usage
 
-Copy the generated API key only into `QUAVE_ALARM_API_KEY` for your agent environment or approved secret store.
+Copy the generated API key only into `QUAVE_PAGER_API_KEY` for your agent environment or approved secret store.
 
 ## macOS app
 
 Recommended terminal install:
 
 ```bash
-curl -fsSL https://alarm.quave.ai/install-macos.sh | bash
+curl -fsSL https://pager.quave.ai/install-macos.sh | bash
 ```
 
 Manual drag-and-drop install:
 
 ```text
-https://github.com/quavedev/quave-alarm-agent/releases/latest/download/QuaveAlarm-macOS.dmg
+https://github.com/quavedev/pager-agent/releases/latest/download/QuavePager-macOS.dmg
 ```
 
-Open the DMG, drag Quave Alarm into Applications, then open it. The terminal installer downloads the latest zip, installs Quave Alarm into `~/Applications`, opens it, and prints the next setup steps.
+Open the DMG, drag Quave Pager into Applications, then open it. The terminal installer downloads the latest zip, installs Quave Pager into `~/Applications`, opens it, and prints the next setup steps.
 
-Open Quave Alarm on macOS, paste an existing API key, and enable launch-at-login in Preferences if you want desktop-first delivery. The macOS app stores the API key in Keychain, long-polls the same API as Android, locally schedules synced future alarms, and shows a full-screen looping alarm until dismiss or snooze.
+Open Quave Pager on macOS, paste an existing API key, and enable launch-at-login in Preferences if you want desktop-first delivery. The macOS app stores the API key in Keychain, long-polls the same API as Android, locally schedules synced future alarms, and shows a full-screen looping alarm until dismiss or snooze.
 
 The current public macOS DMG and zip are Developer ID signed, notarized, and stapled for direct download outside the Mac App Store. Local preview builds may still require an explicit Open action.
 
 ## Agent install
 
 ```bash
-npx skills add quavedev/quave-alarm-agent --skill quave-alarm -g -a '*'
+npx skills add quavedev/pager-agent --skill quave-pager -g -a '*'
 ```
 
-Set your API key as `QUAVE_ALARM_API_KEY`. Create or rotate the key from the Quave Alarm Android app, then reuse it in the macOS app if desired.
+Set your API key as `QUAVE_PAGER_API_KEY`. Create or rotate the key from the Quave Pager Android app, then reuse it in the macOS app if desired.
 
 Dry-run:
 
 ```bash
-npx -y github:quavedev/quave-alarm-agent trigger --dry-run --message "Quave Alarm setup test."
+npx -y github:quavedev/pager-agent trigger --dry-run --message "Quave Pager setup test."
 ```
 
 Real page:
 
 ```bash
-QUAVE_ALARM_API_KEY="<your key>" \
-  npx -y github:quavedev/quave-alarm-agent trigger \
+QUAVE_PAGER_API_KEY="<your key>" \
+  npx -y github:quavedev/pager-agent trigger \
   --message "Look at Codex: I need your decision to continue." \
   --codex-thread-id "<thread-id>"
 ```
@@ -71,24 +71,24 @@ Examples:
 
 ```bash
 # Codex: tell compatible clients how to return to the Codex conversation.
-npx -y github:quavedev/quave-alarm-agent trigger \
+npx -y github:quavedev/pager-agent trigger \
   --message "Look at Codex: I need your decision." \
   --codex-thread-id "<thread-id>"
 
 # Claude Code: copy a resume command on macOS.
-npx -y github:quavedev/quave-alarm-agent trigger \
+npx -y github:quavedev/pager-agent trigger \
   --message "Claude Code is blocked." \
   --claude-session "<session-id>" \
   --ai-cwd "$PWD"
 
 # Cursor: copy a resume command on macOS.
-npx -y github:quavedev/quave-alarm-agent trigger \
+npx -y github:quavedev/pager-agent trigger \
   --message "Cursor agent needs you." \
   --cursor-session "<session-id>" \
   --ai-cwd "$PWD"
 
 # Result/action URL: separate from returning to the AI conversation.
-npx -y github:quavedev/quave-alarm-agent trigger \
+npx -y github:quavedev/pager-agent trigger \
   --message "Review the PR that is ready." \
   --link "https://github.com/example/repo/pull/123"
 ```
@@ -106,12 +106,12 @@ Advanced resume fields:
 List, edit, and remove existing alarms:
 
 ```bash
-npx -y github:quavedev/quave-alarm-agent list
-npx -y github:quavedev/quave-alarm-agent edit <alarm-id> \
+npx -y github:quavedev/pager-agent list
+npx -y github:quavedev/pager-agent edit <alarm-id> \
   --scheduled-at "2026-06-13 16:19:00" \
   --time-zone "America/Campo_Grande" \
   --status pending
-npx -y github:quavedev/quave-alarm-agent remove <alarm-id>
+npx -y github:quavedev/pager-agent remove <alarm-id>
 ```
 
 Use `cancel`, `dismiss`, or `snooze` when you want lifecycle history instead of removal.

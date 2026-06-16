@@ -1,13 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Quave Alarm API",
+    "title": "Quave Pager API",
     "version": "1.0.0",
     "description": "Create, list, update, and manage alarms for the authenticated user's registered devices. Alarm payloads may include link for the result/action URL and aiConversationResume for returning to the AI conversation."
   },
   "servers": [
     {
-      "url": "https://alarm.quave.ai"
+      "url": "https://pager.quave.ai"
     }
   ],
   "components": {
@@ -15,7 +15,7 @@
       "bearerApiKey": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Use QUAVE_ALARM_API_KEY as the bearer token."
+        "description": "Use QUAVE_PAGER_API_KEY as the bearer token."
       }
     }
   },
